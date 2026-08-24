@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/site/Nav";
+import { Hero } from "@/components/site/Hero";
+import { ProofStrip } from "@/components/site/ProofStrip";
+import { Services } from "@/components/site/Services";
+import { HowItWorks } from "@/components/site/HowItWorks";
+import { AiSnapshot } from "@/components/site/AiSnapshot";
+import { Pricing } from "@/components/site/Pricing";
+import { LeadForm } from "@/components/site/LeadForm";
+import { Footer } from "@/components/site/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Shakik Industries — Engineering tomorrow.";
+const description =
+  "We build, host and manage your entire website end-to-end, then deliver continuous AI insights on your traffic, leads and growth. Websites · AI · Automation.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Nav />
+      <main>
+        <Hero />
+        <ProofStrip />
+        <Services />
+        <HowItWorks />
+        <AiSnapshot />
+        <Pricing />
+        <LeadForm />
+      </main>
+      <Footer />
     </div>
   );
 }
